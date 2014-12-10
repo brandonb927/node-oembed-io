@@ -1,6 +1,6 @@
 {
   "name": "node-oembed-io",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "A Node.js wrapper for oEmbed.io",
   "main": "oembed-io.js",
   "repository": {

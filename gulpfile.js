@@ -27,16 +27,19 @@ gulp.task('mocha', ['lint'],  function () {
 gulp.task('commit', function () {
   return gulp.src('./')
     .pipe(git.add())
-    .pipe(git.commit(message))
-    .pipe(gulp.dest('./'));
-})
+    .pipe(git.commit(message));
+});
 
 gulp.task('tag', ['commit'], function () {
-  git.tag(v, message);
+  return git.tag(v, message, function (err) {
+    if (err) { throw err; }
+  });
 });
 
 gulp.task('push', ['tag'], function () {
-  git.push('origin', 'master', { args: ' --tags' }).end();
+  git.push('origin', 'master', { args: ' --tags' }, function (err) {
+    if (err) { throw err; }
+  });
 });
 
 gulp.task('npm', ['push'], function(done) {
