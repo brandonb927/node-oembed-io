@@ -14,8 +14,11 @@ exports.get = function (url, callback) {
     // endpoint + 'api?url=' + encodeURIComponent(url) + qs.stringify(params),
     endpoint + 'api?url=' + encodeURIComponent(url),
     function (err, res, body) {
-      if (err || res.statusCode !== 200) {
-        callback(err);
+      if (err) {
+        return callback(err);
+      }
+      if (res.statusCode !== 200) {
+        return callback(null, res.statusCode);
       }
 
       callback(null, res.statusCode, JSON.parse(body));
